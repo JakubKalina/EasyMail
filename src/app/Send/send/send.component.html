@@ -1,0 +1,86 @@
+<!--Kontener na komponent do wysyłania wiadomości-->
+<div class="container">
+  <!--Nagłówek-->
+  <div>
+      <p>GMAIL</p>
+  </div>
+
+  <!--Pola do podania danych wiadomości-->
+  <div class="form-group">
+
+    <!--Nadawca-->
+      <div class="row input-row">
+        <div class="col-xs-6 col-xs-offset-3">
+              <input class="form-control w-25" type="text" placeholder="Nadawca" id="Sender">
+        </div>
+      </div>
+
+      <!--Hasło-->
+      <div class="row input-row">
+        <div class="col-xs-6 col-xs-offset-3">
+              <input class="form-control" type="password" placeholder="Hasło" id="Password">
+        </div>
+      </div>
+
+      <!--Temat-->
+      <div class="row input-row">
+        <div class="col-xs-6 col-xs-offset-3">
+              <input class="form-control" type="text" placeholder="Temat" id="Subject">
+        </div>
+      </div>
+
+      <!--Wiadomość-->
+      <div class="row input-row">
+        <div class="col-xs-6 col-xs-offset-3">
+             <textarea class="form-control" rows="10" placeholder="Wiadomość" style="resize: none;" id="Message"></textarea>
+        </div>
+      </div>
+
+      <!--Przycisk dodawania adresatów z pliku zewnętrznego-->
+      <div class="dropdown">
+          <button class="dropbtn btn btn-default">Dodaj adresatów z pliku</button>
+          <div class="dropdown-content">
+            <a (click)="loadRecipientsFromExcelFile()">Dodaj z excela</a>
+            <a (click)="loadRecipientsFromTextFile()">Dodaj z pliku tekstowego</a>
+            <a (click)="loadRecipientsFromDatabaseFile()">Dodaj z bazy danych</a>
+          </div>
+      </div>
+
+
+      <!--Przycisk manualnego dodawania adresatów-->
+      <div>
+          <button class="btn btn-default addRecipientButton" type="button" (click)="addNewRecipient()">Dodaj adresata</button>
+      </div>
+
+      <!--Lista adresatów-->
+      <div *ngFor="let recipient of recipients; index as i">
+        <div class="row input-row">
+          <div class="col-xs-6 col-xs-offset-3">
+              <input class="form-control" type="text" placeholder="Adresat" id=Recipient [id]=i>
+          </div>
+        </div>
+      </div>
+
+              <!--Pole umożliwiająca dodanie pliku tekstowego-->
+              <label *ngIf="loadTextFile" class="col-xs-6 col-xs-offset-3 fileInput">
+                  <p class="col-xs-6 col-xs-offset-0">Wybierz plik tekstowy</p>
+                  <input type="file" class="col-xs-6 col-xs-offset-0" (change)="RecipientsFromTextFile($event)">
+                </label>
+          
+                <!--Pole umożliwiające dodanie pliku excel-->
+                <label *ngIf="loadExcelFile" class="col-xs-6 col-xs-offset-3 fileInput">
+                  <p class="col-xs-6 col-xs-offset-0">Wybierz plik excel</p>
+                  <input type="file" class="col-xs-6 col-xs-offset-0" (change)="RecipientsFromExcelFile($event)">
+                </label>
+          
+                <!--Pole umożliwiające dodanie pliku bazy danych-->
+                <label *ngIf="loadDatabaseFile" class=" col-xs-6 col-xs-offset-3 fileInput">
+                  <p class="col-xs-6 col-xs-offset-0">Wybierz plik bazy danych</p>
+                  <input type="file" class="col-xs-6 col-xs-offset-0" (change)="RecipientsFromDatabaseFile($event)">
+                </label>
+
+  </div>
+
+  <button type="submit" class="addRecipient btn btn-default" (click)="sendMessage()">Wyślij</button>
+
+</div>
