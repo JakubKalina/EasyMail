@@ -116,4 +116,9 @@ export class SendComponent implements OnInit {
   loadRecipientsFromDatabaseFile() {
     this.loadDatabaseFile = !this.loadDatabaseFile;
   }
+
+  // Usunięcie pola z adresatem
+  closeRecipientInput(index) {
+    this.recipients.splice(index, 1);
+  }
 }

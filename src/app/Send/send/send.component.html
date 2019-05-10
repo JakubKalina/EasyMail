@@ -1,8 +1,8 @@
 <!--Kontener na komponent do wysyłania wiadomości-->
 <div class="container">
   <!--Nagłówek-->
-  <div>
-      <p>GMAIL</p>
+  <div class="pageHeader">
+      <p>EasyMail</p>
   </div>
 
   <!--Pola do podania danych wiadomości-->
@@ -10,28 +10,28 @@
 
     <!--Nadawca-->
       <div class="row input-row">
-        <div class="col-xs-6 col-xs-offset-3">
+        <div class="col-xs-10 col-xs-offset-1">
               <input class="form-control w-25" type="text" placeholder="Nadawca" id="Sender">
         </div>
       </div>
 
       <!--Hasło-->
       <div class="row input-row">
-        <div class="col-xs-6 col-xs-offset-3">
+        <div class="col-xs-10 col-xs-offset-1">
               <input class="form-control" type="password" placeholder="Hasło" id="Password">
         </div>
       </div>
 
       <!--Temat-->
       <div class="row input-row">
-        <div class="col-xs-6 col-xs-offset-3">
+        <div class="col-xs-10 col-xs-offset-1">
               <input class="form-control" type="text" placeholder="Temat" id="Subject">
         </div>
       </div>
 
       <!--Wiadomość-->
       <div class="row input-row">
-        <div class="col-xs-6 col-xs-offset-3">
+        <div class="col-xs-10 col-xs-offset-1">
              <textarea class="form-control" rows="10" placeholder="Wiadomość" style="resize: none;" id="Message"></textarea>
         </div>
       </div>
@@ -55,8 +55,11 @@
       <!--Lista adresatów-->
       <div *ngFor="let recipient of recipients; index as i">
         <div class="row input-row">
-          <div class="col-xs-6 col-xs-offset-3">
-              <input class="form-control" type="text" placeholder="Adresat" id=Recipient [id]=i>
+          <div class="">
+            <div class="recipientBlockInput">
+              <input class="form-control col-xs-6" type="text" placeholder="Adresat" id=Recipient [id]=i>
+              <span href="#" class="close" (click)="closeRecipientInput(i)"></span>
+            </div>
           </div>
         </div>
       </div>
@@ -79,8 +82,16 @@
                   <input type="file" class="col-xs-6 col-xs-offset-0" (change)="RecipientsFromDatabaseFile($event)">
                 </label>
 
+                <!--Pole określające przerwe czasową pomiędzy wysyłanymi wiadomościami-->
+                <div class="col-xs-10 col-xs-offset-1">
+                                  <div>
+                                    <p class="chosenTimeBreakLabel col-xs-8 col-xs-offset-0">Odstęp pomiędzy wiadomościami (ms)</p>
+                                  </div>
+                                  <div class="col-xs-2">
+                                    <input type="number" min="20" class="form-control" id="chosenTimeBreak"><br>
+                                  </div>
+                </div>
+                <button type="submit" class="sendButton btn btn-default" (click)="sendMessage()">Wyślij teraz</button><br>
+                <button type="submit" class="planSendButton btn btn-default" (click)="planSendingMessage()">Zaplanuj wysłanie</button>
   </div>
-
-  <button type="submit" class="addRecipient btn btn-default" (click)="sendMessage()">Wyślij</button>
-
 </div>
