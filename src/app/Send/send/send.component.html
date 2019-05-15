@@ -58,29 +58,44 @@
           <div class="">
             <div class="recipientBlockInput">
               <input class="form-control col-xs-6" type="text" placeholder="Adresat" id=Recipient [id]=i>
-              <span href="#" class="close" (click)="closeRecipientInput(i)"></span>
+              <div (click)="closeRecipientInput(i)">
+                  <span href="#" class="close"></span>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
               <!--Pole umożliwiająca dodanie pliku tekstowego-->
-              <label *ngIf="loadTextFile" class="col-xs-6 col-xs-offset-3 fileInput">
-                  <p class="col-xs-6 col-xs-offset-0">Wybierz plik tekstowy</p>
-                  <input type="file" class="col-xs-6 col-xs-offset-0" (change)="RecipientsFromTextFile($event)">
-                </label>
-          
+              <div *ngIf="loadTextFile" class="fileInputContainer">
+                <div>
+                  <label class="col-xs-7 col-xs-offset-0 fileInput">
+                    <p class="col-xs-6 col-xs-offset-0">Wybierz plik tekstowy</p>
+                    <input type="file" class="col-xs-6 col-xs-offset-0" (change)="RecipientsFromTextFile($event)">
+                  </label>
+                </div>
+              </div>
+         
                 <!--Pole umożliwiające dodanie pliku excel-->
-                <label *ngIf="loadExcelFile" class="col-xs-6 col-xs-offset-3 fileInput">
-                  <p class="col-xs-6 col-xs-offset-0">Wybierz plik excel</p>
-                  <input type="file" class="col-xs-6 col-xs-offset-0" (change)="RecipientsFromExcelFile($event)">
-                </label>
-          
+                <div *ngIf="loadExcelFile" class="fileInputContainer">
+                  <div>
+                    <label class="col-xs-7 col-xs-offset-0 fileInput">
+                      <p class="col-xs-6 col-xs-offset-0">Wybierz plik excel</p>
+                      <input type="file" class="col-xs-6 col-xs-offset-0" (change)="RecipientsFromExcelFile($event)">
+                    </label>
+                  </div>
+                </div>
+
                 <!--Pole umożliwiające dodanie pliku bazy danych-->
-                <label *ngIf="loadDatabaseFile" class=" col-xs-6 col-xs-offset-3 fileInput">
-                  <p class="col-xs-6 col-xs-offset-0">Wybierz plik bazy danych</p>
-                  <input type="file" class="col-xs-6 col-xs-offset-0" (change)="RecipientsFromDatabaseFile($event)">
-                </label>
+                <div *ngIf="loadDatabaseFile" class="fileInputContainer">
+                  <div>
+                    <label class=" col-xs-7 col-xs-offset-0 fileInput">
+                      <p class="col-xs-6 col-xs-offset-0">Wybierz plik bazy danych</p>
+                      <input type="file" class="col-xs-6 col-xs-offset-0" (change)="RecipientsFromDatabaseFile($event)">
+                    </label>
+                  </div>
+                </div>
+
 
                 <!--Pole określające przerwe czasową pomiędzy wysyłanymi wiadomościami-->
                 <div class="col-xs-10 col-xs-offset-1">
@@ -91,7 +106,9 @@
                                     <input type="number" min="20" class="form-control" id="chosenTimeBreak"><br>
                                   </div>
                 </div>
-                <button type="submit" class="sendButton btn btn-default" (click)="sendMessage()">Wyślij teraz</button><br>
-                <button type="submit" class="planSendButton btn btn-default" (click)="planSendingMessage()">Zaplanuj wysłanie</button>
+                <button type="button" class="sendButton btn btn-default" (click)="sendMessage()">Wyślij teraz</button><br>
+                <button type="button" class="planSendButton btn btn-default" (click)="planSendingMessage()">Zaplanuj wysłanie</button>
+
+
   </div>
 </div>

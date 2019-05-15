@@ -24,6 +24,7 @@ export class SendComponent implements OnInit {
   subscription: Subscription;
   numberOfInputs: number;
 
+
   // Czy można dodać plik txt
   loadTextFile: boolean;
   // Czy można dodać plik excel
