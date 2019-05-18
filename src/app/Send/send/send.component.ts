@@ -23,6 +23,7 @@ export class SendComponent implements OnInit {
   public recipients: Array<string>;
   subscription: Subscription;
   numberOfInputs: number;
+  public recipientsFromFile: string;
 
 
   // Czy można dodać plik txt
@@ -36,7 +37,6 @@ export class SendComponent implements OnInit {
   formGroup = this.fb.group({
     file: [null, Validators.required]
   });
-
 
 
   constructor(private http: HttpClient, private fb: FormBuilder) { }
@@ -83,6 +83,7 @@ export class SendComponent implements OnInit {
 
   // Dodanie nowych adresatów
   addNewRecipient() {
+    // tslint:disable-next-line:quotemark
     this.recipients.push(" ");
     this.numberOfInputs++;
   }
@@ -94,18 +95,29 @@ export class SendComponent implements OnInit {
 
   // Wczytanie danych z pliku
   RecipientsFromTextFile(event) {
+    // tslint:disable-next-line:prefer-const
     let reader = new FileReader();
     if (event.target.files && event.target.files.length) {
       const [file] = event.target.files;
-      reader.readAsDataURL(file);
+      // reader.readAsDataURL(file);
+      reader.readAsText(file);
+
+      this.recipientsFromFile = reader.result as string;
+      this.SplitRecipientsFromTextFile(this.recipientsFromFile);
 
       reader.onload = () => {
+        console.log(reader.result);
+
         this.formGroup.patchValue({
           file: reader.result
         });
       };
     }
-    console.log(this.formGroup);
+  }
+
+  // Rozdzielenie ciągu znaków i dodanie adresów email do tablicy
+  SplitRecipientsFromTextFile(recipientsString: string) {
+
   }
 
   // Załadowanie adresatów z pliku excel
