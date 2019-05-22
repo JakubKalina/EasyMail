@@ -24,6 +24,7 @@ export class SendComponent implements OnInit {
   subscription: Subscription;
   numberOfInputs: number;
   public recipientsFromFile: string;
+  public recipientsFromFileArray: Array<string>;
 
 
   // Czy można dodać plik txt
@@ -99,14 +100,11 @@ export class SendComponent implements OnInit {
     let reader = new FileReader();
     if (event.target.files && event.target.files.length) {
       const [file] = event.target.files;
-      // reader.readAsDataURL(file);
       reader.readAsText(file);
 
-      this.recipientsFromFile = reader.result as string;
-      this.SplitRecipientsFromTextFile(this.recipientsFromFile);
-
       reader.onload = () => {
-        console.log(reader.result);
+        this.recipientsFromFile = reader.result as string;
+        this.SplitRecipientsFromTextFile(this.recipientsFromFile);
 
         this.formGroup.patchValue({
           file: reader.result
@@ -116,8 +114,9 @@ export class SendComponent implements OnInit {
   }
 
   // Rozdzielenie ciągu znaków i dodanie adresów email do tablicy
-  SplitRecipientsFromTextFile(recipientsString: string) {
-
+  SplitRecipientsFromTextFile(recipientsString: any) {
+    let x = recipientsString.split('\n');
+    console.log(x[0]);
   }
 
   // Załadowanie adresatów z pliku excel
