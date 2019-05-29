@@ -45,6 +45,7 @@ export class SendComponent implements OnInit {
   ngOnInit() {
     this.numberOfInputs = 0;
     this.recipients = new Array();
+    this.recipientsFromFileArray = new Array();
     this.getServerData().subscribe(res => {
       console.log(res);
     });
@@ -116,7 +117,10 @@ export class SendComponent implements OnInit {
   // Rozdzielenie ciągu znaków i dodanie adresów email do tablicy
   SplitRecipientsFromTextFile(recipientsString: any) {
     let x = recipientsString.split('\n');
-    console.log(x[0]);
+    for (let i = 0 ; i < 3 ; i++) {
+      this.recipientsFromFileArray.push(x[i]);
+      console.log(x[i]);
+    }
   }
 
   // Załadowanie adresatów z pliku excel
