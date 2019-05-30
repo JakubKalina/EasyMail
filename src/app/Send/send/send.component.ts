@@ -73,6 +73,12 @@ export class SendComponent implements OnInit {
       this.newMail.Recipients.push((document.getElementById(i.toString()) as HTMLInputElement).value);
     }
 
+    if (this.recipientsFromFileArray.length !== 0) {
+      for (let i = 0 ; i < this.recipientsFromFileArray.length; i++) {
+        this.newMail.Recipients.push(this.recipientsFromFileArray[i]);
+      }
+    }
+
     // Wysłanie requesta post do Web Api wraz z obiektem
     this.http.post('https://localhost:44310/api/Mail/send', {
     Sender: this.newMail.Sender,
@@ -117,9 +123,8 @@ export class SendComponent implements OnInit {
   // Rozdzielenie ciągu znaków i dodanie adresów email do tablicy
   SplitRecipientsFromTextFile(recipientsString: any) {
     let x = recipientsString.split('\n');
-    for (let i = 0 ; i < 3 ; i++) {
+    for (let i = 0 ; i < x.length ; i++) {
       this.recipientsFromFileArray.push(x[i]);
-      console.log(x[i]);
     }
   }
 
