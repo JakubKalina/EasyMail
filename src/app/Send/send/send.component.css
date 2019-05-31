@@ -41,9 +41,9 @@
   /*Input dodawania pliku*/
   .fileInput {
     display: block;
-    margin-bottom: 45px;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0 auto;
+    width: 80%;
+    left: 10%;
     border-style: solid;
     border-color:white;
     color: white;
@@ -56,9 +56,8 @@
   .fileInputContainer {
     display: inline-block;
     width: 100%;
-    min-width: 100% !important;
     position: relative;
-    align-content: center;
+    margin: 0 auto;
   }
 
   /*Styl całego kontenera*/

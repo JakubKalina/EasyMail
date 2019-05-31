@@ -69,10 +69,10 @@
               <!--Pole umożliwiająca dodanie pliku tekstowego-->
               <div *ngIf="loadTextFile" class="fileInputContainer">
                 <div>
-                  <label class="col-xs-7 col-xs-offset-0 fileInput">
+                  <div class="col-xs-7 col-xs-offset-0 fileInput">
                     <p class="col-xs-6 col-xs-offset-0">Wybierz plik tekstowy</p>
                     <input title="Adresy email powinny znajdować się w osobnych wierszach" type="file" class="col-xs-6 col-xs-offset-0" (change)="RecipientsFromTextFile($event)">
-                  </label>
+                  </div>
                 </div>
               </div>
          
