@@ -4,6 +4,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Observable, from } from 'rxjs';
 import { Subscription } from 'rxjs';
+import * as XLSX from 'xlsx';
+
 
 const headers = new HttpHeaders({
   'Content-Type': 'application/x-www-form-urlencoded'
@@ -25,6 +27,9 @@ export class SendComponent implements OnInit {
   numberOfInputs: number;
   public recipientsFromFile: string;
   public recipientsFromFileArray: Array<string>;
+  public excelData;
+  willDownload = false;
+
 
 
   // Czy można dodać plik txt
@@ -131,6 +136,42 @@ export class SendComponent implements OnInit {
   // Załadowanie adresatów z pliku excel
   loadRecipientsFromExcelFile() {
     this.loadExcelFile = !this.loadExcelFile;
+  }
+
+ RecipientsFromExcelFile(ev) {
+  let workBook = null;
+  let jsonData = null;
+  const reader = new FileReader();
+  const file = ev.target.files[0];
+  reader.onload = (event) => {
+    const data = reader.result;
+    workBook = XLSX.read(data, { type: 'binary' });
+    jsonData = workBook.SheetNames.reduce((initial, name) => {
+      const sheet = workBook.Sheets[name];
+      initial[name] = XLSX.utils.sheet_to_json(sheet);
+      return initial;
+    }, {});
+    const dataString = JSON.stringify(jsonData);
+
+    this.SplitRecipientsFromExcelFile(dataString);
+    // Testowe wyświetlanie
+    // console.log(dataString);
+  }
+  reader.readAsBinaryString(file);
+}
+
+  // Rozdzielenie ciągu znaków i dodanie adresów email do tablicy
+  SplitRecipientsFromExcelFile(recipientsString: any) {
+    const fileDataArray = new Array();
+    const fileData = recipientsString.split('"');
+
+    for (let i = 0 ; i < fileData.length; i++) {
+      if (fileData[i].includes('@')) {
+        fileDataArray.push(fileData[i]);
+      }
+    }
+
+    console.log(fileDataArray);
   }
 
   // Załadowanie adresatów z pliku bazy danych

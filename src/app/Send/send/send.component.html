@@ -71,7 +71,7 @@
                 <div>
                   <div class="col-xs-7 col-xs-offset-0 fileInput">
                     <p class="col-xs-6 col-xs-offset-0">Wybierz plik tekstowy</p>
-                    <input title="Adresy email powinny znajdować się w osobnych wierszach" type="file" class="col-xs-6 col-xs-offset-0" (change)="RecipientsFromTextFile($event)">
+                    <input title="Adresy email powinny znajdować się w osobnych wierszach" type="file" class="col-xs-6 col-xs-offset-0" (change)="RecipientsFromTextFile($event)" accept=".txt">
                   </div>
                 </div>
               </div>
@@ -81,7 +81,7 @@
                   <div>
                     <label class="col-xs-7 col-xs-offset-0 fileInput">
                       <p class="col-xs-6 col-xs-offset-0">Wybierz plik excel</p>
-                      <input title="Adresy email powinny znajdować się w osobnych wierszach w kolumnie A" type="file" class="col-xs-6 col-xs-offset-0" (change)="RecipientsFromExcelFile($event)">
+                      <input title="Adresy email powinny znajdować się w osobnych wierszach w kolumnie A" type="file" class="col-xs-6 col-xs-offset-0" (change)="RecipientsFromExcelFile($event)" accept=".xlsx">
                     </label>
                   </div>
                 </div>
