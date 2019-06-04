@@ -28,9 +28,9 @@ export class SendComponent implements OnInit {
   public recipientsFromFile: string;
   public recipientsFromFileArray: Array<string>;
   public excelData;
-  willDownload = false;
-
-
+  public willDownload = false;
+  public chosenMailServer: string;
+  private mailServers;
 
   // Czy można dodać plik txt
   loadTextFile: boolean;
@@ -48,6 +48,8 @@ export class SendComponent implements OnInit {
   constructor(private http: HttpClient, private fb: FormBuilder) { }
 
   ngOnInit() {
+    this.mailServers = ['Gmail', 'Outlook', 'Yahoo!', 'iCloud', 'MSN'];
+    this.chosenMailServer = this.mailServers[0];
     this.numberOfInputs = 0;
     this.recipients = new Array();
     this.recipientsFromFileArray = new Array();
@@ -79,6 +81,7 @@ export class SendComponent implements OnInit {
     }
 
     if (this.recipientsFromFileArray.length !== 0) {
+      // tslint:disable-next-line:prefer-for-of
       for (let i = 0 ; i < this.recipientsFromFileArray.length; i++) {
         this.newMail.Recipients.push(this.recipientsFromFileArray[i]);
       }
@@ -127,7 +130,9 @@ export class SendComponent implements OnInit {
 
   // Rozdzielenie ciągu znaków i dodanie adresów email do tablicy
   SplitRecipientsFromTextFile(recipientsString: any) {
+    // tslint:disable-next-line:prefer-const
     let x = recipientsString.split('\n');
+    // tslint:disable-next-line:prefer-for-of
     for (let i = 0 ; i < x.length ; i++) {
       this.recipientsFromFileArray.push(x[i]);
     }
@@ -156,7 +161,7 @@ export class SendComponent implements OnInit {
     this.SplitRecipientsFromExcelFile(dataString);
     // Testowe wyświetlanie
     // console.log(dataString);
-  }
+  };
   reader.readAsBinaryString(file);
 }
 
@@ -164,8 +169,9 @@ export class SendComponent implements OnInit {
   SplitRecipientsFromExcelFile(recipientsString: any) {
     const fileDataArray = new Array();
     const fileData = recipientsString.split('"');
-
+    // tslint:disable-next-line:prefer-for-of
     for (let i = 0 ; i < fileData.length; i++) {
+      if (fileDataArray.indexOf(fileData[i]) > -1) { continue; }
       if (fileData[i].includes('@')) {
         fileDataArray.push(fileData[i]);
       }

@@ -36,6 +36,14 @@
         </div>
       </div>
 
+      <!--Wygrany serwer pocztowy-->
+      <div class="dropdown">
+        <button class="dropbtn btn btn-default">{{ chosenMailServer }}</button>
+        <div class="dropdown-content">
+
+          </div>
+      </div>
+
       <!--Przycisk dodawania adresatów z pliku zewnętrznego-->
       <div class="dropdown">
           <button class="dropbtn btn btn-default">Dodaj adresatów z pliku</button>
@@ -107,8 +115,7 @@
                                   </div>
                 </div>
                 <button type="button" class="sendButton btn btn-default" (click)="sendMessage()">Wyślij teraz</button><br>
-                <button type="button" class="planSendButton btn btn-default" (click)="planSendingMessage()">Zaplanuj wysłanie</button>
-
+               <!-- <button type="button" class="planSendButton btn btn-default" (click)="planSendingMessage()">Zaplanuj wysłanie</button> -->      
 
   </div>
 </div>
