@@ -189,4 +189,9 @@ export class SendComponent implements OnInit {
   closeRecipientInput(index) {
     this.recipients.splice(index, 1);
   }
+
+  // Wybrany serwer pocztowy
+  loadChosenMailServer(server) {
+    this.chosenMailServer = server;
+  }
 }
