@@ -132,6 +132,8 @@ export class SendComponent implements OnInit {
   SplitRecipientsFromTextFile(recipientsString: any) {
     // tslint:disable-next-line:prefer-const
     let x = recipientsString.split('\n');
+    // Jeśli plik wejściowy jest pusty
+    if (x === null || x.length === 0) { return; }
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0 ; i < x.length ; i++) {
       this.recipientsFromFileArray.push(x[i]);
@@ -157,10 +159,7 @@ export class SendComponent implements OnInit {
       return initial;
     }, {});
     const dataString = JSON.stringify(jsonData);
-
     this.SplitRecipientsFromExcelFile(dataString);
-    // Testowe wyświetlanie
-    // console.log(dataString);
   };
   reader.readAsBinaryString(file);
 }
@@ -169,6 +168,8 @@ export class SendComponent implements OnInit {
   SplitRecipientsFromExcelFile(recipientsString: any) {
     const fileDataArray = new Array();
     const fileData = recipientsString.split('"');
+    // Jeśli plik wejściowy jest pusty
+    if (fileData.length === 0 || recipientsString === null) { return; }
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0 ; i < fileData.length; i++) {
       if (fileDataArray.indexOf(fileData[i]) > -1) { continue; }
@@ -176,7 +177,7 @@ export class SendComponent implements OnInit {
         fileDataArray.push(fileData[i]);
       }
     }
-
+    // Testowe wyświetlanie
     console.log(fileDataArray);
   }
 
