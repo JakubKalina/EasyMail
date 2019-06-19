@@ -74,6 +74,8 @@ export class SendComponent implements OnInit {
     this.newMail.Subject = (document.getElementById('Subject') as HTMLInputElement).value;
     this.newMail.Message = (document.getElementById('Message') as HTMLInputElement).value;
     this.newMail.Recipients = new Array();
+    this.newMail.Server = this.chosenMailServer;
+    this.newMail.TimeBreak = Number((document.getElementById('chosenTimeBreak') as HTMLInputElement).value);
 
     // Pobranie adresatów oraz dodanie ich do tablicy
     for (let i = 0 ; i < this.numberOfInputs; i++) {
@@ -93,7 +95,9 @@ export class SendComponent implements OnInit {
     Password: this.newMail.Password,
     Subject: this.newMail.Subject,
     Message: this.newMail.Message,
-    Recipients: this.newMail.Recipients
+    Recipients: this.newMail.Recipients,
+    Server: this.newMail.Server,
+    TimeBreak: this.newMail.TimeBreak
   }).subscribe(res => console.log(res));
   }
 

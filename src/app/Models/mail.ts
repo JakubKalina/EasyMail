@@ -11,4 +11,8 @@ export class Mail {
     public Message: string;
     // Adresaci
     public Recipients: Array<string>;
+    // Wybrany serwer pocztowy
+    public Server: string;
+    // Odstęp czasowy pomiędzy wiadomościami
+    public TimeBreak: number;
 }
